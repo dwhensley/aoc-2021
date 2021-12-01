@@ -15,8 +15,7 @@ fn get_input(path: &Path) -> Result<Vec<i32>, Box<dyn Error>> {
 }
 
 fn diff(slc: &[i32]) -> Vec<i32> {
-    let slc_len = slc.len();
-    slc[0..slc_len - 1]
+    slc[0..slc.len() - 1]
         .iter()
         .zip(slc[1..].iter())
         .map(|(&v0, &v1)| v1 - v0)
@@ -30,26 +29,18 @@ fn moving_sum(slc: &[i32], window_size: usize) -> Vec<i32> {
 }
 
 fn count_positive(slc: &[i32]) -> u32 {
-    let mut cnt = 0;
-    for &v in slc.iter() {
-        if v > 0 {
-            cnt += 1;
-        }
-    }
-    cnt
+    slc.iter()
+        .fold(0u32, |acc, &v| if v > 0 { acc + 1 } else { acc })
 }
 
 pub(crate) fn puzz1() {
     let input = get_input(Path::new(INPUT_PATH)).expect("Could not read input data");
-    let input_diff = diff(&input);
-    let cnt_larger = count_positive(&input_diff);
+    let cnt_larger = count_positive(&diff(&input));
     println!(
         "{} measurements larger than the previous measurement",
         cnt_larger
     );
-    let window_summed_input = moving_sum(&input, 3);
-    let window_summed_diff = diff(&window_summed_input);
-    let cnt_larger = count_positive(&window_summed_diff);
+    let cnt_larger = count_positive(&diff(&moving_sum(&input, 3)));
     println!(
         "{} values larger than the previous value in window-summed input",
         cnt_larger
