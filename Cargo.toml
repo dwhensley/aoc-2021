@@ -7,3 +7,7 @@ edition = "2021"
 
 [dependencies]
 csv = "1.1"
+
+[[bin]]
+name = "aoc-2021-rust"
+path = "src/rust/main.rs"
