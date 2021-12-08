@@ -4,6 +4,7 @@ mod puzz3;
 mod puzz4;
 mod puzz5;
 mod puzz6;
+mod puzz7;
 
 fn main() {
     println!("Hello, AoC is fun!");
@@ -25,4 +26,7 @@ fn main() {
     println!("\nPuzzle 6");
     println!("--------\n");
     puzz6::puzz6();
+    println!("\nPuzzle 7");
+    println!("--------\n");
+    puzz7::puzz7();
 }
